@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    // 这样就可以对 `this` 上的数据属性进行更严格的推断`
+    "strict": true,
+    "noImplicitAny": true, // 必须声明变量类型
+    "noImplicitThis": true, // 不允许this上下文隐式定义
+    "strictNullChecks": true, // 避免空指针带来的bug（严格的null检查）
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  // 表示编译需要的文件或目录
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+}
