@@ -1,6 +1,6 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <img class="img" alt="Vue logo" src="https://vitejs.cn/logo.svg" />
+  <HelloWorld msg="Hello Vue 3 + Vite + TypeScript" />
 </template>
 
 <script setup lang="ts">
@@ -18,5 +18,8 @@ import HelloWorld from '@/components/HelloWorld.vue'
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.img {
+  width: 240px;
 }
 </style>

@@ -1,19 +1,20 @@
 <template>
-  <div>默认的count:{{ state.count }}</div>
-  <button @click="increment">增加</button>
+  <h1>{{msg}}</h1>
+  测试
+  {{ count }}
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from "vue"
-type DState = {
-  count: number;
-  double: number;
-}
-const state: DState = reactive({
-  count: 0,
-  double: computed(() => state.count *2)
+import { ref, reactive, defineProps } from 'vue'
+// ref就是一般某个元素，简单数据类型   reactive对象
+defineProps({
+  msg: String
 })
-function increment() {
-  state.count++;
-}
+
+const count = ref(0)
+console.log('count', count.value);
+count.value++
+console.log('count2',count.value);
+
+
 </script>
