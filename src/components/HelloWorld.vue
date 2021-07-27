@@ -12,9 +12,9 @@ defineProps({
 })
 
 const count = ref(0)
+
 console.log('count', count.value);
 count.value++
 console.log('count2',count.value);
-
 
 </script>
