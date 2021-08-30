@@ -6,6 +6,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@types/echarts": "^4.9.9",
+    "echarts": "^5.1.2",
     "vue": "^3.0.5"
   },
   "devDependencies": {
