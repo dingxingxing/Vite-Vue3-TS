@@ -1,46 +1,72 @@
 <template>
-  <h1>{{ msg }}</h1>
+  
+  <div>
+    <div class="tage">
+      <img class="img" src="https://vitejs.cn/logo.svg" alt="">
+      <div>5456454645</div>
+    </div>
+    
+  </div>
+  
 </template>
   
 <script setup lang="ts">
-/**
- * 1、不需要手动传入依赖
- * 2、不是lazy初始化都会执行分析依赖
- * 3、无法获取初始值
- * 4、一些异步操作 放里面更加合适
- * 5、watch第三个参数处理副作用的第一个参数
- */
-import { ref, defineProps, watchEffect, onMounted } from 'vue'
-defineProps({
-  msg: String
-})
+  
+import { ref, defineProps, onMounted} from 'vue'
 
-const num = ref(0);
 onMounted(() => {
-  console.log('onMounted');
-})
+  let moveElem:any = document.querySelector('.img'); //待拖拽元素   \
+  console.log('选取到元素：', moveElem);
+  
+  let dragging:Boolean; //是否激活拖拽状态
+  let tLeft:any, tTop:any; //鼠标按下时相对于选中元素的位移
 
-const stop = watchEffect((onInvalidate) => {
-  /* 副作用 */
-  console.log('watchEffect之前调用', num.value);
-  onInvalidate(() => {
-    console.log('副作用即将执行时或者监听器停止监听，调用~', num.value);
+  //监听鼠标按下事件
+  document.addEventListener('mousedown', function(e) {
+      if (e.target == moveElem) {
+          
+        dragging = true; //激活拖拽状态
+        let moveElemRect = moveElem && moveElem.getBoundingClientRect();
+        console.log('走进激活拖动', moveElemRect);
+        if(moveElemRect) {
+          tLeft = e.clientX - moveElemRect.left; //鼠标按下时和选中元素的坐标偏移:x坐标
+          tTop = e.clientY - moveElemRect.top; //鼠标按下时和选中元素的坐标偏移:y坐标
+        }
+          
+      }
+  });
+
+  //监听鼠标放开事件
+  document.addEventListener('mouseup', function(e) {
+          let moveX = e.clientX - tLeft, 
+                moveY = e.clientY - tTop;
+          
+          moveElem.style.left = moveX + 'px';
+          moveElem.style.top = moveY + 'px';
+      dragging = false;
+
+  });
+
+  //监听鼠标移动事件
+  document.addEventListener('mousemove', function(e) {
+      let moveX = e.clientX - tLeft, 
+                moveY = e.clientY - tTop;
+          console.log(moveX,moveY);
+  });
   })
-}, {
-  onTrigger(e) { // 将在依赖项变更导致副作用被触发时被调用
-    // debugger
-    console.log('将在依赖项变更导致副作用被触发时被调用', num.value);
-
-  }
-})
-
-setTimeout(() => {
-  console.log('开始改变依赖', num.value);
-  num.value++
-  console.log('改变依赖了', num.value);
-}, 1000)
 
 </script>
   
 <style scope>
+.tage {
+  margin: 0 auto;
+  background-color: #2f4554;
+  display: flex;
+  flex-direction: column;
+}
+.img {
+  width: 100px;
+  /* position:absolute; */
+  margin-left: 20px;
+}
 </style>

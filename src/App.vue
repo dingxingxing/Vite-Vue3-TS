@@ -1,5 +1,5 @@
 <template>
-  <img class="img" alt="Vue logo" src="https://vitejs.cn/logo.svg" />
+  <!-- <img class="img" alt="Vue logo" src="https://vitejs.cn/logo.svg" /> -->
   <HelloWorld msg="Hello Vue 3 + Vite + TypeScript" />
   <!-- <echartsList></echartsList> -->
 </template>
